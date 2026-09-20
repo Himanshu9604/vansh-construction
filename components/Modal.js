@@ -21,7 +21,7 @@ export default function Modal({ title, onClose, children, wide }) {
           <p className="section-title" style={{ margin: 0 }}>{title}</p>
           <button className="btn btn-ghost btn-sm" onClick={onClose} aria-label="Close">✕</button>
         </div>
-        {children}
+        <div className="modal-body">{children}</div>
       </div>
     </div>
   );

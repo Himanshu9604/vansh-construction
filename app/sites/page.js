@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useApp } from "@/lib/AppContext";
 import Modal from "@/components/Modal";
 import StatCard from "@/components/StatCard";
-import { fmtMoney } from "@/lib/calc";
+import { fmtMoney, fmtMoneyPdf } from "@/lib/calc";
 import { exportTablePdf } from "@/lib/pdf";
 
 export default function SitesPage() {
@@ -43,7 +43,7 @@ export default function SitesPage() {
             "vansh-construction-sites.pdf",
             "Sites Overview",
             ["Name", "Village", "Plot Sqft", "Contract Value", "Status"],
-            rows.map(s => [s.name, s.gaon || "—", s.plotSqft || "—", s.contractValue ? fmtMoney(s.contractValue) : "—", s.active !== false ? "Active" : "Closed"])
+            rows.map(s => [s.name, s.gaon || "—", s.plotSqft || "—", s.contractValue ? fmtMoneyPdf(s.contractValue) : "—", s.active !== false ? "Active" : "Closed"])
           )}>📄 PDF</button>
           <button className="btn btn-primary" onClick={() => setEditing({})}>+ New Site</button>
         </div>

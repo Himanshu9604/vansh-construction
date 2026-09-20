@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useApp } from "@/lib/AppContext";
 import Modal from "@/components/Modal";
-import { fmtMoney, todayStr } from "@/lib/calc";
+import { fmtMoney, fmtMoneyPdf, todayStr } from "@/lib/calc";
 import { exportTablePdf } from "@/lib/pdf";
 
 const DEFAULT_RATIO = { cement: 0.4, sand: 1.2, gitti: 1.0, steel: 3.5 }; // per sqft thumb rule
@@ -87,8 +87,8 @@ export default function MaterialPage() {
             "vansh-construction-materials.pdf",
             "Material Purchases",
             ["Date", "Site", "Type", "Qty", "Cost"],
-            filteredMaterials.map(m => [m.date, data.sites.find(s => s.id === m.siteId)?.name || "—", m.type, m.qty, fmtMoney(m.cost)]),
-            `Total: ${fmtMoney(totalCost)}`
+            filteredMaterials.map(m => [m.date, data.sites.find(s => s.id === m.siteId)?.name || "—", m.type, m.qty, fmtMoneyPdf(m.cost)]),
+            `Total: ${fmtMoneyPdf(totalCost)}`
           )}>📄 PDF</button>
           <button className="btn btn-primary" onClick={() => setEditing({})}>+ Add Entry</button>
         </div>

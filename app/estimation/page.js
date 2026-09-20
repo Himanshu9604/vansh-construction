@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import { useApp } from "@/lib/AppContext";
 import Modal from "@/components/Modal";
-import { fmtMoney, todayStr } from "@/lib/calc";
+import { fmtMoney, fmtMoneyPdf, todayStr } from "@/lib/calc";
 import { exportSummaryPdf } from "@/lib/pdf";
 
 const BLANK_FORM = {
@@ -64,13 +64,13 @@ export default function EstimationPage() {
       {
         headers: ["Item", "Details", "Amount"],
         rows: [
-          ["Construction", `${est.constructionArea || 0} sqft @ ${fmtMoney(est.constructionRate)}/sqft`, fmtMoney(c.constructionCost)],
-          ["Compound Wall", `${est.compoundLength || 0} ft @ ${fmtMoney(est.compoundRate)}/ft`, fmtMoney(c.compoundCost)],
-          ["Plastering", `${est.plasterArea || 0} sqft @ ${fmtMoney(est.plasterRate)}/sqft`, fmtMoney(c.plasterCost)],
-          ["Additional Costs", est.note || "—", fmtMoney(c.additional)],
-          ["Subtotal", "", fmtMoney(c.subtotal)],
-          [`Margin / Profit (${est.marginPercent}%)`, "", fmtMoney(c.profit)],
-          ["Grand Total", "", fmtMoney(c.grandTotal)],
+          ["Construction", `${est.constructionArea || 0} sqft @ ${fmtMoneyPdf(est.constructionRate)}/sqft`, fmtMoneyPdf(c.constructionCost)],
+          ["Compound Wall", `${est.compoundLength || 0} ft @ ${fmtMoneyPdf(est.compoundRate)}/ft`, fmtMoneyPdf(c.compoundCost)],
+          ["Plastering", `${est.plasterArea || 0} sqft @ ${fmtMoneyPdf(est.plasterRate)}/sqft`, fmtMoneyPdf(c.plasterCost)],
+          ["Additional Costs", est.note || "—", fmtMoneyPdf(c.additional)],
+          ["Subtotal", "", fmtMoneyPdf(c.subtotal)],
+          [`Margin / Profit (${est.marginPercent}%)`, "", fmtMoneyPdf(c.profit)],
+          ["Grand Total", "", fmtMoneyPdf(c.grandTotal)],
         ],
       }
     );

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useApp } from "@/lib/AppContext";
 import Modal from "@/components/Modal";
 import StatCard from "@/components/StatCard";
-import { ROLE_LABEL, ROLE_DEFAULT_RATE, fmtMoney } from "@/lib/calc";
+import { ROLE_LABEL, ROLE_DEFAULT_RATE, fmtMoney, fmtMoneyPdf } from "@/lib/calc";
 import { exportTablePdf } from "@/lib/pdf";
 
 const ROLE_FILTERS = [
@@ -60,7 +60,7 @@ export default function LabourersPage() {
             "vansh-construction-labourers.pdf",
             "Labourer List",
             ["Name", "Village", "Role", "Rate", "Status"],
-            rows.map(l => [l.name, l.gaon || "—", ROLE_LABEL[l.role] || l.role, fmtMoney(l.rate || ROLE_DEFAULT_RATE[l.role]), l.active !== false ? "Active" : "Inactive"])
+            rows.map(l => [l.name, l.gaon || "—", ROLE_LABEL[l.role] || l.role, fmtMoneyPdf(l.rate || ROLE_DEFAULT_RATE[l.role]), l.active !== false ? "Active" : "Inactive"])
           )}>📄 PDF</button>
           <button className="btn btn-primary" onClick={() => setEditing({})}>+ New Labourer</button>
         </div>

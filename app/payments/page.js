@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useApp } from "@/lib/AppContext";
 import {
-  todayStr, weekStartOf, weekEndOf, addDays, fmtMoney, fmtDateShort,
+  todayStr, weekStartOf, weekEndOf, addDays, fmtMoney, fmtMoneyPdf, fmtDateShort,
   weeklyBreakdown, weeklyAdvance, periodSlab, whatsappWeekSummary, ROLE_LABEL,
 } from "@/lib/calc";
 import { exportTablePdf } from "@/lib/pdf";
@@ -38,8 +38,8 @@ export default function PaymentsPage() {
       `weekly-payment-${weekStart}.pdf`,
       `Weekly Payment — ${fmtDateShort(weekStart)} to ${fmtDateShort(weekEnd)}`,
       ["Labourer", "Role", "Full", "Half", "Absent", "Gross", "Advance", "Net Payable", "Status"],
-      rows.map(r => [r.lab.name, ROLE_LABEL[r.lab.role] || r.lab.role, r.wb.full, r.wb.half, r.wb.absent, fmtMoney(r.wb.total), r.advance ? fmtMoney(r.advance) : "—", fmtMoney(r.net), r.paid ? "Paid" : "Pending"]),
-      `Total Net Payable: ${fmtMoney(totalNet)}${totalSlab > 0 ? ` · Plus ${fmtMoney(totalSlab)} slab/bulk payments` : ""}`
+      rows.map(r => [r.lab.name, ROLE_LABEL[r.lab.role] || r.lab.role, r.wb.full, r.wb.half, r.wb.absent, fmtMoneyPdf(r.wb.total), r.advance ? fmtMoneyPdf(r.advance) : "—", fmtMoneyPdf(r.net), r.paid ? "Paid" : "Pending"]),
+      `Total Net Payable: ${fmtMoneyPdf(totalNet)}${totalSlab > 0 ? ` · Plus ${fmtMoneyPdf(totalSlab)} slab/bulk payments` : ""}`
     );
   }
 

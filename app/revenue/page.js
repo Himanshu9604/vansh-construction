@@ -4,7 +4,7 @@ import { useApp } from "@/lib/AppContext";
 import StatCard from "@/components/StatCard";
 import BarChart from "@/components/BarChart";
 import {
-  todayStr, weekStartOf, weekEndOf, addDays, fmtMoney, fmtDateShort,
+  todayStr, weekStartOf, weekEndOf, addDays, fmtMoney, fmtMoneyPdf, fmtDateShort,
   commissionRate, periodCommission, periodWages, periodSlab, last6MonthsWages,
 } from "@/lib/calc";
 import { exportTablePdf } from "@/lib/pdf";
@@ -38,8 +38,8 @@ export default function RevenuePage() {
       `revenue-${weekStart}.pdf`,
       `Site Revenue — ${fmtDateShort(weekStart)} to ${fmtDateShort(weekEnd)}`,
       ["Site", "Wages + Slab", "Your Commission", "Total Billable"],
-      siteRows.map(r => [r.site.name, fmtMoney(r.wages + r.slab), fmtMoney(r.comm), fmtMoney(r.billable)]),
-      `Commission rate: ${fmtMoney(rate)} per labourer per full day`
+      siteRows.map(r => [r.site.name, fmtMoneyPdf(r.wages + r.slab), fmtMoneyPdf(r.comm), fmtMoneyPdf(r.billable)]),
+      `Commission rate: ${fmtMoneyPdf(rate)} per labourer per full day`
     );
   }
 
